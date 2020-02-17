@@ -11,8 +11,10 @@ from openpyxl.styles import Font, Color, Alignment, Border, Side, colors
 FILEPATH = os.path.dirname(os.path.realpath(__file__)) + '/' + './file.pdf'
 SEARCH_PATTERN = r"(?:[-,.\/\\а-яА-Я0-9_\t ]+\n?)+"
 LABELS_PER_COL = 5
-COLUMN_WIDTH = 25
-ROW_HEIGHT = 70
+COLUMN_WIDTH = 20
+ROW_HEIGHT = 61
+FONT_SIZE = 8
+FONT_NAME = "Arial" # Arial, Times New Roman
 
 def export_labels(pdf: str) -> list:
     print("Attempting to parse pdf file:", pdf)
@@ -57,6 +59,7 @@ def create_spreadsheet(labels: list, filename: str):
             sheet.row_dimensions[row].height = ROW_HEIGHT
 
         sheet.cell(row, column + 1, label).alignment = center_aligned_text
+        sheet.cell(row, column + 1).font = Font(size = FONT_SIZE, name = FONT_NAME) 
     
     try:
         filename = filename.replace(".pdf", ".xlsx")
