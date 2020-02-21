@@ -11,7 +11,7 @@ from openpyxl.styles import Font, Color, Alignment, Border, Side, colors
 FILEPATH = os.path.dirname(os.path.realpath(__file__)) + '/' + './file.pdf'
 SEARCH_PATTERN = r"(?:[-,.\/\\а-яА-Я0-9_\t ]+\n?)+"
 LABELS_PER_COL = 5
-COLUMN_WIDTH = 20
+COLUMN_WIDTH = 18
 ROW_HEIGHT = 61
 FONT_SIZE = 8
 FONT_NAME = "Arial" # Arial, Times New Roman
@@ -60,6 +60,15 @@ def create_spreadsheet(labels: list, filename: str):
 
         sheet.cell(row, column + 1, label).alignment = center_aligned_text
         sheet.cell(row, column + 1).font = Font(size = FONT_SIZE, name = FONT_NAME) 
+    
+    # fix margins
+    sheet.page_margins.left = 0.15
+    sheet.page_margins.right = 0.15
+    sheet.page_margins.top = 0.4
+    sheet.page_margins.bottom = 0
+    sheet.page_margins.header = 0
+    sheet.page_margins.footer = 0
+    sheet.print_options.horizontalCentered = True
     
     try:
         filename = filename.replace(".pdf", ".xlsx")
