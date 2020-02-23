@@ -12,7 +12,7 @@ FILEPATH = os.path.dirname(os.path.realpath(__file__)) + '/' + './file.pdf'
 SEARCH_PATTERN = r"(?:[-,.\/\\а-яА-Я0-9_\t ]+\n?)+"
 LABELS_PER_COL = 5
 COLUMN_WIDTH = 18
-ROW_HEIGHT = 61
+ROW_HEIGHT = 65
 FONT_SIZE = 8
 FONT_NAME = "Arial" # Arial, Times New Roman
 
@@ -65,7 +65,7 @@ def create_spreadsheet(labels: list, filename: str):
     sheet.page_margins.left = 0.15
     sheet.page_margins.right = 0.15
     sheet.page_margins.top = 0.4
-    sheet.page_margins.bottom = 0
+    sheet.page_margins.bottom = 0.4
     sheet.page_margins.header = 0
     sheet.page_margins.footer = 0
     sheet.print_options.horizontalCentered = True
