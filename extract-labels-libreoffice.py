@@ -117,6 +117,7 @@ def reinsert_sides(sides: list, labels: list):
                 break
         else:
             print("Could not find an appropriate position for:", side)
+            labels.append(side)
 
     return
 
