@@ -16,6 +16,7 @@ ROW_HEIGHT = 60
 FONT_SIZE = 8
 FONT_NAME = "Arial" # Arial, Times New Roman
 SIDES_TEXT = "Гарнитура"
+BREAD_TEXT = ["Хляб", "Филия", "Земел"]
 
 def export_labels(pdf: str) -> list:
     print("Attempting to parse pdf file:", pdf)
@@ -121,6 +122,20 @@ def reinsert_sides(sides: list, labels: list):
 
     return
 
+#
+# Remove bread items
+#
+def remove_bread(labels: list) -> int:
+    num_bread_removed = 0
+    for label in labels.copy():
+        for b in BREAD_TEXT:
+            if b.lower() in label.lower():
+                num_bread_removed += 1
+                print(num_bread_removed, "Removing bread:", label)
+                labels.remove(label)
+
+    return num_bread_removed
+
 def create_spreadsheet(labels: list, filename: str):
     print("Creating spreadsheet...")
     workbook = openpyxl.Workbook()
@@ -193,6 +208,8 @@ def main(args: list):
         for i, label in enumerate(clear_whitespace(labels)):
             print(i, label)
 
+        num_bread_removed = remove_bread(labels)
+        print("Number of bread removed:", num_bread_removed)
         create_spreadsheet(labels, a)
     
     input("Job finished.")
